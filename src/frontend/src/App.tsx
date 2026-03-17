@@ -11,7 +11,9 @@ import {
   Calendar,
   CheckCircle2,
   ChevronRight,
+  ClipboardCheck,
   Code2,
+  Copy,
   Download,
   ExternalLink,
   GraduationCap,
@@ -26,12 +28,14 @@ import {
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const queryClient = new QueryClient();
 
 function Portfolio() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [emailCopied, setEmailCopied] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -44,6 +48,17 @@ function Portfolio() {
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
       setMobileMenuOpen(false);
+    }
+  };
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText("shyam60838@gmail.com");
+      setEmailCopied(true);
+      toast.success("Email address copied to clipboard!");
+      setTimeout(() => setEmailCopied(false), 2500);
+    } catch {
+      toast.error("Could not copy. Please copy the address manually.");
     }
   };
 
@@ -379,13 +394,10 @@ function Portfolio() {
                 <Phone className="w-4 h-4 text-primary flex-shrink-0" />
                 +91-8148955498
               </a>
-              <a
-                href="mailto:shyam60838@gmail.com"
-                className="flex items-center gap-2 hover:text-foreground transition-colors"
-              >
+              <span className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-primary flex-shrink-0" />
                 shyam60838@gmail.com
-              </a>
+              </span>
             </motion.div>
           </motion.div>
         </div>
@@ -868,12 +880,9 @@ function Portfolio() {
                     <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-0.5">
                       Email
                     </p>
-                    <a
-                      href="mailto:shyam60838@gmail.com"
-                      className="font-semibold text-foreground hover:text-primary transition-colors"
-                    >
+                    <span className="font-semibold text-foreground select-all">
                       shyam60838@gmail.com
-                    </a>
+                    </span>
                   </div>
                 </div>
 
@@ -934,58 +943,74 @@ function Portfolio() {
                       Reach Out Directly
                     </h3>
                     <p className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto">
-                      The fastest way to connect — no forms, no waiting. Your
-                      email lands straight in my inbox.
+                      No forms, no apps needed. Copy the email address below and
+                      write from any email provider.
                     </p>
                   </div>
 
                   {/* Divider */}
                   <div className="border-t border-border mb-8" />
 
-                  {/* CTA Buttons */}
-                  <div className="space-y-4">
+                  {/* Email display + copy */}
+                  <div
+                    className="flex items-center justify-between gap-3 rounded-xl border border-border px-4 py-3 mb-4"
+                    style={{ background: "oklch(0.55 0.19 27 / 0.04)" }}
+                  >
+                    <span className="font-mono font-semibold text-foreground text-sm select-all truncate">
+                      shyam60838@gmail.com
+                    </span>
                     <Button
-                      asChild
-                      size="lg"
+                      size="sm"
+                      variant="ghost"
                       data-ocid="contact.primary_button"
-                      className="w-full gap-3 font-semibold text-base"
+                      onClick={copyEmail}
+                      className="flex-shrink-0 gap-1.5 text-xs font-semibold"
                     >
-                      <a href="mailto:shyam60838@gmail.com?subject=Opportunity%20for%20Shyam%20S">
-                        <Mail className="w-5 h-5" />
-                        Send Email
-                      </a>
-                    </Button>
-
-                    <p className="text-center text-xs text-muted-foreground">
-                      Opens your email app with my address pre-filled and ready
-                      to go.
-                    </p>
-
-                    <Button
-                      asChild
-                      size="lg"
-                      variant="outline"
-                      data-ocid="contact.secondary_button"
-                      className="w-full gap-3 font-semibold text-base"
-                    >
-                      <a href="tel:+918148955498">
-                        <Phone className="w-5 h-5" />
-                        Call Now
-                      </a>
+                      {emailCopied ? (
+                        <>
+                          <ClipboardCheck className="w-4 h-4 text-green-600" />
+                          <span className="text-green-600">Copied!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4" />
+                          Copy
+                        </>
+                      )}
                     </Button>
                   </div>
 
+                  <p className="text-center text-xs text-muted-foreground mb-6">
+                    Click <span className="font-semibold">Copy</span>, then open
+                    Gmail, Outlook, or any email app and paste into the To
+                    field.
+                  </p>
+
+                  {/* Call button */}
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    data-ocid="contact.secondary_button"
+                    className="w-full gap-3 font-semibold text-base"
+                  >
+                    <a href="tel:+918148955498">
+                      <Phone className="w-5 h-5" />
+                      Call Now
+                    </a>
+                  </Button>
+
                   {/* Footer note */}
                   <div
-                    className="mt-8 rounded-xl p-4 text-center"
+                    className="mt-6 rounded-xl p-4 text-center"
                     style={{ background: "oklch(0.55 0.19 27 / 0.06)" }}
                   >
                     <p className="text-xs text-muted-foreground">
                       <span className="font-semibold text-foreground">
                         Response time:
                       </span>{" "}
-                      Usually within 24 hours · Available for calls Mon–Sat, 9
-                      AM – 7 PM IST
+                      Usually within 24 hours · Available Mon–Sat, 9 AM – 7 PM
+                      IST
                     </p>
                   </div>
                 </CardContent>
