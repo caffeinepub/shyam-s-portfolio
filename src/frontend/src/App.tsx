@@ -11,9 +11,7 @@ import {
   Calendar,
   CheckCircle2,
   ChevronRight,
-  ClipboardCheck,
   Code2,
-  Copy,
   Download,
   ExternalLink,
   GraduationCap,
@@ -28,14 +26,12 @@ import {
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
-import { toast } from "sonner";
 
 const queryClient = new QueryClient();
 
 function Portfolio() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [emailCopied, setEmailCopied] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -48,17 +44,6 @@ function Portfolio() {
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
       setMobileMenuOpen(false);
-    }
-  };
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText("shyam60838@gmail.com");
-      setEmailCopied(true);
-      toast.success("Email address copied to clipboard!");
-      setTimeout(() => setEmailCopied(false), 2500);
-    } catch {
-      toast.error("Could not copy. Please copy the address manually.");
     }
   };
 
@@ -179,7 +164,6 @@ function Portfolio() {
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            {/* Logo */}
             <button
               type="button"
               onClick={() => scrollTo("home")}
@@ -188,7 +172,6 @@ function Portfolio() {
               Shyam<span className="text-primary"> S</span>
             </button>
 
-            {/* Desktop Nav */}
             <nav className="hidden md:flex items-center gap-6">
               {navLinks.map((link) => (
                 <button
@@ -203,7 +186,6 @@ function Portfolio() {
               ))}
             </nav>
 
-            {/* Download Resume */}
             <a
               href="/assets/uploads/SHYAM_Resume-1.pdf"
               target="_blank"
@@ -216,7 +198,6 @@ function Portfolio() {
               </Button>
             </a>
 
-            {/* Mobile menu toggle */}
             <button
               type="button"
               className="md:hidden p-2 rounded-md text-foreground"
@@ -232,7 +213,6 @@ function Portfolio() {
           </div>
         </div>
 
-        {/* Mobile Nav */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
@@ -279,7 +259,6 @@ function Portfolio() {
         data-ocid="hero.section"
         className="relative min-h-screen flex items-center overflow-hidden"
       >
-        {/* Background image */}
         <div
           className="absolute inset-0 z-0"
           style={{
@@ -290,10 +269,7 @@ function Portfolio() {
             opacity: 0.6,
           }}
         />
-        {/* Gradient overlay */}
         <div className="absolute inset-0 z-0 bg-gradient-to-br from-background via-background/90 to-background/70" />
-
-        {/* Decorative red line */}
         <div
           className="absolute left-0 top-0 bottom-0 w-1.5 z-10"
           style={{ background: "oklch(0.55 0.19 27)" }}
@@ -306,7 +282,6 @@ function Portfolio() {
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="max-w-3xl"
           >
-            {/* Available badge */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -326,7 +301,6 @@ function Portfolio() {
               </span>
             </motion.div>
 
-            {/* Name */}
             <motion.h1
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
@@ -337,7 +311,6 @@ function Portfolio() {
               <span className="text-primary block md:inline"> S</span>
             </motion.h1>
 
-            {/* Subheading */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -348,7 +321,6 @@ function Portfolio() {
               Support
             </motion.p>
 
-            {/* CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -376,7 +348,6 @@ function Portfolio() {
               </Button>
             </motion.div>
 
-            {/* Contact info row */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -402,7 +373,6 @@ function Portfolio() {
           </motion.div>
         </div>
 
-        {/* Scroll hint */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -441,7 +411,6 @@ function Portfolio() {
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-12 items-start">
-            {/* Summary */}
             <motion.div
               initial={{ opacity: 0, x: -24 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -476,9 +445,7 @@ function Portfolio() {
               </div>
             </motion.div>
 
-            {/* Cards column */}
             <div className="flex flex-col gap-6">
-              {/* Education */}
               <motion.div
                 initial={{ opacity: 0, x: 24 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -515,7 +482,6 @@ function Portfolio() {
                 </Card>
               </motion.div>
 
-              {/* Certifications & Languages */}
               <motion.div
                 initial={{ opacity: 0, x: 24 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -642,9 +608,7 @@ function Portfolio() {
             </h2>
           </motion.div>
 
-          {/* Timeline */}
           <div className="relative">
-            {/* Vertical line */}
             <div
               className="absolute left-5 md:left-7 top-0 bottom-0 w-0.5"
               style={{ background: "oklch(var(--border))" }}
@@ -661,7 +625,6 @@ function Portfolio() {
                   transition={{ duration: 0.6, delay: expIdx * 0.15 }}
                   className="relative pl-16 md:pl-20"
                 >
-                  {/* Timeline dot */}
                   <div className="timeline-dot absolute left-[11px] md:left-[19px] top-1.5" />
 
                   <Card className="shadow-card hover:shadow-card-hover transition-shadow duration-300">
@@ -737,7 +700,6 @@ function Portfolio() {
               transition={{ duration: 0.6 }}
             >
               <Card className="h-full shadow-card hover:shadow-card-hover transition-all duration-300 group overflow-hidden">
-                {/* Project header bar */}
                 <div
                   className="h-2 w-full"
                   style={{
@@ -782,7 +744,6 @@ function Portfolio() {
               </Card>
             </motion.div>
 
-            {/* CTA card */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -834,189 +795,92 @@ function Portfolio() {
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-            {/* Contact Info */}
-            <motion.div
-              initial={{ opacity: 0, x: -24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-                I&apos;m actively seeking entry-level opportunities in Chennai.
-                Whether you have a role, project, or just want to connect —
-                I&apos;d love to hear from you.
-              </p>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl"
+          >
+            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+              I&apos;m actively seeking entry-level opportunities in Chennai.
+              Whether you have a role, project, or just want to connect —
+              I&apos;d love to hear from you.
+            </p>
 
-              <div className="space-y-5">
-                <div className="flex items-center gap-4">
-                  <div
-                    className="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: "oklch(0.55 0.19 27 / 0.1)" }}
-                  >
-                    <Phone className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-0.5">
-                      Phone
-                    </p>
-                    <a
-                      href="tel:+918148955498"
-                      className="font-semibold text-foreground hover:text-primary transition-colors"
-                    >
-                      +91-8148955498
-                    </a>
-                  </div>
+            <div className="space-y-5">
+              <div className="flex items-center gap-4">
+                <div
+                  className="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ background: "oklch(0.55 0.19 27 / 0.1)" }}
+                >
+                  <Phone className="w-5 h-5 text-primary" />
                 </div>
-
-                <div className="flex items-center gap-4">
-                  <div
-                    className="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: "oklch(0.55 0.19 27 / 0.1)" }}
+                <div>
+                  <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-0.5">
+                    Phone
+                  </p>
+                  <a
+                    href="tel:+918148955498"
+                    className="font-semibold text-foreground hover:text-primary transition-colors"
                   >
-                    <Mail className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-0.5">
-                      Email
-                    </p>
-                    <span className="font-semibold text-foreground select-all">
-                      shyam60838@gmail.com
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div
-                    className="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: "oklch(0.55 0.19 27 / 0.1)" }}
-                  >
-                    <MapPin className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-0.5">
-                      Location
-                    </p>
-                    <span className="font-semibold text-foreground">
-                      Chennai, Tamil Nadu
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div
-                    className="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: "oklch(0.55 0.19 27 / 0.1)" }}
-                  >
-                    <CheckCircle2 className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-0.5">
-                      Availability
-                    </p>
-                    <span className="font-semibold text-foreground">
-                      Immediate | Open to Shift
-                    </span>
-                  </div>
+                    +91-8148955498
+                  </a>
                 </div>
               </div>
-            </motion.div>
 
-            {/* Reach Out Card */}
-            <motion.div
-              initial={{ opacity: 0, x: 24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <Card className="shadow-card">
-                <CardContent className="p-8 md:p-10">
-                  {/* Card header */}
-                  <div className="text-center mb-8">
-                    <div
-                      className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
-                      style={{ background: "oklch(0.55 0.19 27 / 0.1)" }}
-                    >
-                      <Mail className="w-8 h-8 text-primary" />
-                    </div>
-                    <h3 className="font-display font-bold text-2xl text-foreground mb-2">
-                      Reach Out Directly
-                    </h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto">
-                      No forms, no apps needed. Copy the email address below and
-                      write from any email provider.
-                    </p>
-                  </div>
-
-                  {/* Divider */}
-                  <div className="border-t border-border mb-8" />
-
-                  {/* Email display + copy */}
-                  <div
-                    className="flex items-center justify-between gap-3 rounded-xl border border-border px-4 py-3 mb-4"
-                    style={{ background: "oklch(0.55 0.19 27 / 0.04)" }}
-                  >
-                    <span className="font-mono font-semibold text-foreground text-sm select-all truncate">
-                      shyam60838@gmail.com
-                    </span>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      data-ocid="contact.primary_button"
-                      onClick={copyEmail}
-                      className="flex-shrink-0 gap-1.5 text-xs font-semibold"
-                    >
-                      {emailCopied ? (
-                        <>
-                          <ClipboardCheck className="w-4 h-4 text-green-600" />
-                          <span className="text-green-600">Copied!</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="w-4 h-4" />
-                          Copy
-                        </>
-                      )}
-                    </Button>
-                  </div>
-
-                  <p className="text-center text-xs text-muted-foreground mb-6">
-                    Click <span className="font-semibold">Copy</span>, then open
-                    Gmail, Outlook, or any email app and paste into the To
-                    field.
+              <div className="flex items-center gap-4">
+                <div
+                  className="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ background: "oklch(0.55 0.19 27 / 0.1)" }}
+                >
+                  <Mail className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-0.5">
+                    Email
                   </p>
+                  <span className="font-semibold text-foreground select-all">
+                    shyam60838@gmail.com
+                  </span>
+                </div>
+              </div>
 
-                  {/* Call button */}
-                  <Button
-                    asChild
-                    size="lg"
-                    variant="outline"
-                    data-ocid="contact.secondary_button"
-                    className="w-full gap-3 font-semibold text-base"
-                  >
-                    <a href="tel:+918148955498">
-                      <Phone className="w-5 h-5" />
-                      Call Now
-                    </a>
-                  </Button>
+              <div className="flex items-center gap-4">
+                <div
+                  className="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ background: "oklch(0.55 0.19 27 / 0.1)" }}
+                >
+                  <MapPin className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-0.5">
+                    Location
+                  </p>
+                  <span className="font-semibold text-foreground">
+                    Chennai, Tamil Nadu
+                  </span>
+                </div>
+              </div>
 
-                  {/* Footer note */}
-                  <div
-                    className="mt-6 rounded-xl p-4 text-center"
-                    style={{ background: "oklch(0.55 0.19 27 / 0.06)" }}
-                  >
-                    <p className="text-xs text-muted-foreground">
-                      <span className="font-semibold text-foreground">
-                        Response time:
-                      </span>{" "}
-                      Usually within 24 hours · Available Mon–Sat, 9 AM – 7 PM
-                      IST
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
+              <div className="flex items-center gap-4">
+                <div
+                  className="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ background: "oklch(0.55 0.19 27 / 0.1)" }}
+                >
+                  <CheckCircle2 className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-0.5">
+                    Availability
+                  </p>
+                  <span className="font-semibold text-foreground">
+                    Immediate | Open to Shift
+                  </span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
